@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using FireNetCSharp.Controller;
+using FireNetCSharp.View;
 using SharpPcap;
 
 namespace FireNetCSharp
@@ -8,6 +9,7 @@ namespace FireNetCSharp
     public partial class Main : Form
     {
         private DeviceService _deviceService = new DeviceService();
+        private Device _selectedDevice;
 
         public Main()
         {
@@ -56,11 +58,21 @@ namespace FireNetCSharp
             var devices = _deviceService.GetAllDeviceInfo();
             if (cmbDevices.SelectedIndex >= 0)
             {
-                var device = devices[cmbDevices.SelectedIndex];
-                
-                txtDeviceInfo.Clear();
-                txtDeviceInfo.Text = device.ToString();
+                _selectedDevice = devices[cmbDevices.SelectedIndex];
             }
+        }
+
+        private void propertiesClicked(object sender, EventArgs e)
+        {
+            if (_selectedDevice == null)
+            {
+                MessageBox.Show("Please select a device first.", "No Device Selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DeviceProperties deviceProperties = new DeviceProperties(_selectedDevice);
+            deviceProperties.Show();
         }
     }
 }

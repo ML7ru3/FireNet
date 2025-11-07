@@ -33,11 +33,11 @@ namespace FireNetCSharp.Controller
                         {
                             Name = liveDev.Description,
                             Description = liveDev.Name,
-                            MacAddress = liveDev.MacAddress?.ToString(),
-                            IpAddress = firstAddr?.Addr?.ipAddress?.ToString(),
-                            Netmask = firstAddr?.Netmask?.ipAddress?.ToString(),
-                            Broadcast = firstAddr?.Broadaddr?.ipAddress?.ToString(),
-                            LinkType = liveDev.LinkType.ToString(),
+                            MacAddress = liveDev.MacAddress?.ToString() ?? "N/A",
+                            IpAddress = firstAddr?.Addr?.ipAddress?.ToString() ?? "N/A",
+                            Netmask = firstAddr?.Netmask?.ipAddress?.ToString() ?? "N/A",
+                            Broadcast = firstAddr?.Broadaddr?.ipAddress?.ToString() ?? "N/A",
+                            LinkType = liveDev.LinkType.ToString() ?? "N/A",
                         });
                     }
                     catch (Exception ex)
