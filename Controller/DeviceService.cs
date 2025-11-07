@@ -1,7 +1,9 @@
 ﻿using FireNetCSharp.Controller.Interface;
-using FireNetCSharp.Model;
 using SharpPcap;
+using SharpPcap.LibPcap;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FireNetCSharp.Controller
 {
@@ -17,18 +19,39 @@ namespace FireNetCSharp.Controller
 
         public List<Device> GetAllDeviceInfo()
         {
-            _deviceList.Refresh();
-
             var devices = new List<Device>();
-
             foreach (var dev in _deviceList)
             {
-                devices.Add(new Device
+                if (dev is LibPcapLiveDevice liveDev)
                 {
-                    Name = dev.Name,
-                    Description = dev.Description,
-                });
+                    try
+                    {
+                        liveDev.Open(); // Required before accessign some fields
+
+                        var firstAddr = liveDev.Addresses.FirstOrDefault(a => a.Addr?.ipAddress != null);
+                        devices.Add(new Device
+                        {
+                            Name = liveDev.Description,
+                            Description = liveDev.Name,
+                            MacAddress = liveDev.MacAddress?.ToString(),
+                            IpAddress = firstAddr?.Addr?.ipAddress?.ToString(),
+                            Netmask = firstAddr?.Netmask?.ipAddress?.ToString(),
+                            Broadcast = firstAddr?.Broadaddr?.ipAddress?.ToString(),
+                            LinkType = liveDev.LinkType.ToString(),
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error loading {liveDev.Name}: {ex.Message}");
+                    }
+                    finally
+                    {
+                        if (liveDev.Opened)
+                            liveDev.Close(); // Always close when done
+                    }
+                }
             }
+
 
             return devices;
         }

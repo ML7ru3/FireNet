@@ -1,7 +1,4 @@
-﻿using FireNetCSharp.Model;
-using SharpPcap;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FireNetCSharp.Controller.Interface
 {

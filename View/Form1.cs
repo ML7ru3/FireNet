@@ -35,7 +35,7 @@ namespace FireNetCSharp
 
                 foreach (var dev in devices)
                 {
-                    cmbDevices.Items.Add(dev.Description);
+                    cmbDevices.Items.Add(dev.Name);
                 }
 
                 cmbDevices.SelectedIndex = 0;
@@ -57,8 +57,9 @@ namespace FireNetCSharp
             if (cmbDevices.SelectedIndex >= 0)
             {
                 var device = devices[cmbDevices.SelectedIndex];
-                lstDeviceInfo.Items.Clear();
-                lstDeviceInfo.Items.Add(device.Name);
+                
+                txtDeviceInfo.Clear();
+                txtDeviceInfo.Text = device.ToString();
             }
         }
     }
