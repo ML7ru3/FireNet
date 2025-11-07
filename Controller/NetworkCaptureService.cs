@@ -1,6 +1,4 @@
-﻿using SharpPcap;
-using System;
-
+﻿
 namespace FireNetCSharp
 {
     public class NetworkCaptureService

@@ -9,8 +9,8 @@
     <RootNamespace>FireNetCSharp</RootNamespace>
     <AssemblyName>FireNetCSharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-	  <LangVersion>13.0</LangVersion>
-	  <FileAlignment>512</FileAlignment>
+    <LangVersion>13.0</LangVersion>
+    <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -72,18 +72,21 @@
   <ItemGroup>
     <Compile Include="Controller\DeviceService.cs" />
     <Compile Include="Controller\Interface\IDeviceService.cs" />
+    <Compile Include="Controller\Interface\INetworkStatisticService.cs" />
+    <Compile Include="Controller\NetworkStatisticService.cs" />
+    <Compile Include="Model\Packet.cs" />
     <Compile Include="Model\Device.cs" />
-    <Compile Include="View\Form1.cs">
+    <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="View\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller\NetworkCaptureService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="View\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="View\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
