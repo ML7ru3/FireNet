@@ -76,6 +76,12 @@
     <Compile Include="Controller\NetworkStatisticService.cs" />
     <Compile Include="Model\Packet.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="View\DeviceProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DeviceProperties.Designer.cs">
+      <DependentUpon>DeviceProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="Controller\NetworkCaptureService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\DeviceProperties.resx">
+      <DependentUpon>DeviceProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

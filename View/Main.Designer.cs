@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cmbDevices = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.networkChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -59,17 +59,17 @@
             // 
             // networkChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.networkChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.networkChart.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.networkChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.networkChart.Legends.Add(legend1);
             this.networkChart.Location = new System.Drawing.Point(326, 46);
             this.networkChart.Name = "networkChart";
             this.networkChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.networkChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.networkChart.Series.Add(series1);
             this.networkChart.Size = new System.Drawing.Size(795, 498);
             this.networkChart.TabIndex = 3;
             this.networkChart.Text = "chart1";
@@ -82,14 +82,15 @@
             this.txtDeviceInfo.Size = new System.Drawing.Size(284, 498);
             this.txtDeviceInfo.TabIndex = 4;
             // 
-            // Form1
+            // Main
             // 
             this.ClientSize = new System.Drawing.Size(1150, 585);
             this.Controls.Add(this.txtDeviceInfo);
             this.Controls.Add(this.networkChart);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.cmbDevices);
-            this.Name = "Form1";
+            this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
