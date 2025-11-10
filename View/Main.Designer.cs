@@ -47,6 +47,7 @@
             this.networkTab = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this._updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.packetCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.packetCaptureGrid)).BeginInit();
             this.firewallTab.SuspendLayout();
@@ -120,6 +121,9 @@
             // 
             // packetCaptureGrid
             // 
+            this.packetCaptureGrid.AllowUserToAddRows = false;
+            this.packetCaptureGrid.AllowUserToDeleteRows = false;
+            this.packetCaptureGrid.AllowUserToOrderColumns = true;
             this.packetCaptureGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.packetCaptureGrid.Location = new System.Drawing.Point(10, 59);
             this.packetCaptureGrid.Name = "packetCaptureGrid";
@@ -144,11 +148,12 @@
             this.firewallTab.Location = new System.Drawing.Point(0, 0);
             this.firewallTab.Name = "firewallTab";
             this.firewallTab.SelectedIndex = 0;
-            this.firewallTab.Size = new System.Drawing.Size(1150, 636);
+            this.firewallTab.Size = new System.Drawing.Size(1150, 644);
             this.firewallTab.TabIndex = 7;
             // 
             // networkTab
             // 
+            this.networkTab.Controls.Add(this.packetCount);
             this.networkTab.Controls.Add(this.packetCaptureGrid);
             this.networkTab.Controls.Add(this.cmbDevices);
             this.networkTab.Controls.Add(this.networkChart);
@@ -158,7 +163,7 @@
             this.networkTab.Location = new System.Drawing.Point(4, 22);
             this.networkTab.Name = "networkTab";
             this.networkTab.Padding = new System.Windows.Forms.Padding(3);
-            this.networkTab.Size = new System.Drawing.Size(1142, 610);
+            this.networkTab.Size = new System.Drawing.Size(1142, 618);
             this.networkTab.TabIndex = 0;
             this.networkTab.Text = "Network";
             this.networkTab.UseVisualStyleBackColor = true;
@@ -177,9 +182,17 @@
             // 
             this._updateTimer.Tick += new System.EventHandler(this.UpdateChart);
             // 
+            // packetCount
+            // 
+            this.packetCount.AutoSize = true;
+            this.packetCount.Location = new System.Drawing.Point(10, 593);
+            this.packetCount.Name = "packetCount";
+            this.packetCount.Size = new System.Drawing.Size(0, 13);
+            this.packetCount.TabIndex = 7;
+            // 
             // Main
             // 
-            this.ClientSize = new System.Drawing.Size(1150, 636);
+            this.ClientSize = new System.Drawing.Size(1150, 644);
             this.Controls.Add(this.firewallTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -191,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.packetCaptureGrid)).EndInit();
             this.firewallTab.ResumeLayout(false);
             this.networkTab.ResumeLayout(false);
+            this.networkTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -209,6 +223,7 @@
         private System.Windows.Forms.TabPage networkTab;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Timer _updateTimer;
+        private System.Windows.Forms.Label packetCount;
     }
 }
 

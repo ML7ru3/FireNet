@@ -1,9 +1,11 @@
 ﻿using FireNetCSharp.Controller;
 using FireNetCSharp.Controller.Interface;
+using FireNetCSharp.Model;
 using FireNetCSharp.View;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -14,6 +16,9 @@ namespace FireNetCSharp
         private IDeviceService _deviceService;
         private INetworkCaptureService _networkCaptureSerivice;
         private LibPcapLiveDevice _selectedDevice;
+        private long numPackets = 0;
+
+        private BindingList<PacketDetail> _packetList = new BindingList<PacketDetail>();
         public Main(IDeviceService deviceService)
         {
             InitializeComponent();
@@ -26,12 +31,15 @@ namespace FireNetCSharp
             _updateTimer = new Timer();
             _updateTimer.Interval = 1000; // update every second
             _updateTimer.Tick += UpdateChart;
+
+            packetCaptureGrid.DataSource = _packetList;
+            packetCaptureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadDevices();
-            InitializeChart();
+            InitializeGridChart();
         }
 
         private void LoadDevices()
@@ -70,7 +78,50 @@ namespace FireNetCSharp
             }
             _selectedDevice.Open();
             _networkCaptureSerivice = new NetworkCaptureService(_selectedDevice);
+            _networkCaptureSerivice.PacketCaptured += NetworkCaptureService_PacketCaptured;
         }
+
+        /// <summary>
+        /// Handles the event when a network packet is captured, adding it to the internal packet list.
+        /// </summary>
+        /// <remarks>This method ensures thread-safe addition of packets to the list. If the method is
+        /// called from a  different thread than the one that created the control, it uses <see cref="Control.Invoke"/>
+        /// to  marshal the call to the correct thread. The list is limited to the last 1000 packets, removing  the
+        /// oldest packet when this limit is exceeded.</remarks>
+        /// <param name="sender">The source of the event, typically the network capture service.</param>
+        /// <param name="packet">The details of the captured packet to be added to the list.</param>
+        private void NetworkCaptureService_PacketCaptured(object sender, PacketDetail packet)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    _packetList.Add(packet);
+                    numPackets++;
+
+                    // Optional: limit to last 900 packets
+                    if (_packetList.Count > 900)
+                    {
+                        _packetList.RemoveAt(0);
+                    }
+
+                    packetCount.Text = $"The number of packets: {numPackets}";
+                }));
+            }
+            else
+            {
+                _packetList.Add(packet);
+                numPackets++;
+
+                if (_packetList.Count > 900)
+                {
+                    _packetList.RemoveAt(0);
+                }
+
+                packetCount.Text = $"The number of packets: {numPackets}";
+            }
+        }
+
 
         private void propertiesClicked(object sender, EventArgs e)
         {
@@ -101,7 +152,7 @@ namespace FireNetCSharp
                 CapturingState(true);
 
                 _updateTimer.Start();
-                InitializeChart();
+                InitializeGridChart();
             }
             else
             {
@@ -136,10 +187,13 @@ namespace FireNetCSharp
             networkChart.Series["uploadSpeed"].ToolTip = $"#VALY at {time}";
         }
 
-        private void InitializeChart()
+        private void InitializeGridChart()
         {
             networkChart.Series["downloadSpeed"].Points.Clear();
             networkChart.Series["uploadSpeed"].Points.Clear();
+            _packetList.Clear();
+            numPackets = 0;
+            packetCount.Text = string.Empty;
         }
 
         private void CapturingState(bool started)

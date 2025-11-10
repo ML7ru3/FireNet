@@ -1,4 +1,6 @@
-﻿using SharpPcap.LibPcap;
+﻿using FireNetCSharp.Model;
+using SharpPcap.LibPcap;
+using System;
 using System.Threading.Tasks;
 
 namespace FireNetCSharp.Controller.Interface
@@ -9,5 +11,7 @@ namespace FireNetCSharp.Controller.Interface
         Task StopCapturing();
         double GetDownloadStatistic();
         double GetUploadStatistic();
+
+        event EventHandler<PacketDetail> PacketCaptured;
     }
 }
