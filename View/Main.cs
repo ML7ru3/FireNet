@@ -130,6 +130,10 @@ namespace FireNetCSharp
             string time = DateTime.Now.ToString("HH:mm:ss");
             networkChart.Series["downloadSpeed"].Points.AddXY(time, downloadSpeed);
             networkChart.Series["uploadSpeed"].Points.AddXY(time, uploadSpeed);
+
+            // Tooltip
+            networkChart.Series["downloadSpeed"].ToolTip = $"#VALY at {time}";
+            networkChart.Series["uploadSpeed"].ToolTip = $"#VALY at {time}";
         }
 
         private void InitializeChart()
