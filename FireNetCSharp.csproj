@@ -72,9 +72,9 @@
   <ItemGroup>
     <Compile Include="Controller\DeviceService.cs" />
     <Compile Include="Controller\Interface\IDeviceService.cs" />
-    <Compile Include="Controller\Interface\INetworkStatisticService.cs" />
-    <Compile Include="Controller\NetworkStatisticService.cs" />
-    <Compile Include="Model\Packet.cs" />
+    <Compile Include="Controller\Interface\INetworkCaptureService.cs" />
+    <Compile Include="Controller\NetworkCaptureService.cs" />
+    <Compile Include="Model\PacketDetail.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="View\DeviceProperties.cs">
       <SubType>Form</SubType>
@@ -88,7 +88,6 @@
     <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controller\NetworkCaptureService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="View\DeviceProperties.resx">

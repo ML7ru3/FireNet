@@ -1,24 +1,25 @@
-﻿using System;
-using System.Windows.Forms;
-using FireNetCSharp.Controller;
+﻿using FireNetCSharp.Controller;
 using FireNetCSharp.Controller.Interface;
 using FireNetCSharp.View;
 using SharpPcap;
 using SharpPcap.LibPcap;
+using System;
+using System.Windows.Forms;
 
 namespace FireNetCSharp
 {
     public partial class Main : Form
     {
         private IDeviceService _deviceService;
-        private INetworkStatisticService _networkStatisticService;
+        private INetworkCaptureService _networkStatisticService;
         private LibPcapLiveDevice _selectedDevice;
+
+        private int _timeCounter = 0;
 
         public Main(IDeviceService deviceService)
         {
             InitializeComponent();
             _deviceService = deviceService;
-            _networkStatisticService = new NetworkStatisticService();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,6 +67,7 @@ namespace FireNetCSharp
                 _selectedDevice = devices[cmbDevices.SelectedIndex];
             }
             _selectedDevice.Open();
+            _networkStatisticService = new NetworkCaptureService(_selectedDevice);
         }
 
         private void propertiesClicked(object sender, EventArgs e)
@@ -92,13 +94,13 @@ namespace FireNetCSharp
 
             if (startCaptureButton.Text == "Start Capturing")
             {
-                _networkStatisticService.StartCapturing(_selectedDevice);
+                _networkStatisticService.StartCapturing();
                 startCaptureButton.Text = "Stop Capturing";
                 cmbDevices.Enabled = false;
             }
             else
             {
-                _networkStatisticService.StopCapturing(_selectedDevice);
+                _networkStatisticService.StopCapturing();
                 startCaptureButton.Text = "Start Capturing";
                 cmbDevices.Enabled = true; 
             }

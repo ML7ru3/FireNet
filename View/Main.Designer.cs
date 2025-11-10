@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -41,6 +42,7 @@
             this.firewallTab = new System.Windows.Forms.TabControl();
             this.networkTab = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this._updateTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.packetCaptureGrid)).BeginInit();
             this.firewallTab.SuspendLayout();
@@ -119,7 +121,7 @@
             this.firewallTab.Location = new System.Drawing.Point(0, 0);
             this.firewallTab.Name = "firewallTab";
             this.firewallTab.SelectedIndex = 0;
-            this.firewallTab.Size = new System.Drawing.Size(1150, 620);
+            this.firewallTab.Size = new System.Drawing.Size(1150, 636);
             this.firewallTab.TabIndex = 7;
             // 
             // networkTab
@@ -133,7 +135,7 @@
             this.networkTab.Location = new System.Drawing.Point(4, 22);
             this.networkTab.Name = "networkTab";
             this.networkTab.Padding = new System.Windows.Forms.Padding(3);
-            this.networkTab.Size = new System.Drawing.Size(1142, 594);
+            this.networkTab.Size = new System.Drawing.Size(1142, 610);
             this.networkTab.TabIndex = 0;
             this.networkTab.Text = "Network";
             this.networkTab.UseVisualStyleBackColor = true;
@@ -150,7 +152,7 @@
             // 
             // Main
             // 
-            this.ClientSize = new System.Drawing.Size(1150, 620);
+            this.ClientSize = new System.Drawing.Size(1150, 636);
             this.Controls.Add(this.firewallTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -178,6 +180,7 @@
         private System.Windows.Forms.TabControl firewallTab;
         private System.Windows.Forms.TabPage networkTab;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Timer _updateTimer;
     }
 }
 
