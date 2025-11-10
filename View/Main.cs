@@ -147,5 +147,19 @@ namespace FireNetCSharp
             cmbDevices.Enabled = !started;
             btnRefresh.Enabled = !started; 
         }
+
+        private void networkChart_MouseMove(object sender, MouseEventArgs e)
+        {
+            var pos = e.Location;
+            var result = networkChart.HitTest(pos.X, pos.Y);
+            if (result.ChartElementType == ChartElementType.DataPoint)
+            {
+                networkChart.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                networkChart.Cursor = Cursors.Default;
+            }
+        }
     }
 }

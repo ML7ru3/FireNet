@@ -106,6 +106,7 @@
             this.networkChart.Titles.Add(title1);
             this.networkChart.Titles.Add(title2);
             this.networkChart.Titles.Add(title3);
+            this.networkChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.networkChart_MouseMove);
             // 
             // propertiesButton
             // 
