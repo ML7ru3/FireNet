@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using SharpPcap.LibPcap;
+using System.Threading.Tasks;
 
 namespace FireNetCSharp.Controller.Interface
 {
     internal interface INetworkStatisticService
     {
-        Task<int> GetDownloadStatistic();
+        Task StartCapturing(LibPcapLiveDevice device);
 
-        Task<int> GetUploadStatistic();
+        Task StopCapturing(LibPcapLiveDevice device);
     }
 }

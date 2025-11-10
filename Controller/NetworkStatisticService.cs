@@ -1,24 +1,39 @@
 ﻿using FireNetCSharp.Controller.Interface;
 using SharpPcap;
+using SharpPcap.LibPcap;
 using System;
 using System.Threading.Tasks;
 
 namespace FireNetCSharp.Controller
 {
-    internal class NetworkStatisticService(ICaptureDevice device) : INetworkStatisticService
+    public class NetworkStatisticService() : INetworkStatisticService
     {
-
-        private ICaptureDevice _device = device;
-        private long _byteReceived = 0;
-        
-        public Task<int> GetDownloadStatistic()
+        public Task StartCapturing(LibPcapLiveDevice device)
         {
-            throw new NotImplementedException();
+            device.OnPacketArrival += new PacketArrivalEventHandler(OnPacketArrival);
+            device.StartCapture();
+            return Task.CompletedTask;
         }
 
-        public Task<int> GetUploadStatistic()
+        public Task StopCapturing(LibPcapLiveDevice device)
         {
-            throw new NotImplementedException();
+            device.StopCapture();
+            return Task.CompletedTask;  
+        }
+
+        private void OnPacketArrival(object sender, PacketCapture e)
+        {
+            try
+            {
+                var rawPacket = e.GetPacket();
+                var time = rawPacket.Timeval.Date;
+                var length = rawPacket.Data.Length;
+                Console.WriteLine($"{time.ToLongTimeString()} Len={length}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing packet: {ex.Message}");
+            }
         }
     }
 }

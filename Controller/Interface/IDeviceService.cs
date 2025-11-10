@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using SharpPcap;
+using SharpPcap.LibPcap;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FireNetCSharp.Controller.Interface
 {
-    internal interface IDeviceService
+    public interface IDeviceService
     {
-        List<Device> GetAllDeviceInfo();
+        List<LibPcapLiveDevice> GetAllDeviceInfo();
     }
 }

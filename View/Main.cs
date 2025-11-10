@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
 using FireNetCSharp.Controller;
+using FireNetCSharp.Controller.Interface;
 using FireNetCSharp.View;
 using SharpPcap;
+using SharpPcap.LibPcap;
 
 namespace FireNetCSharp
 {
     public partial class Main : Form
     {
-        private DeviceService _deviceService = new DeviceService();
-        private Device _selectedDevice;
+        private IDeviceService _deviceService;
+        private INetworkStatisticService _networkStatisticService;
+        private LibPcapLiveDevice _selectedDevice;
 
-        public Main()
+        public Main(IDeviceService deviceService)
         {
             InitializeComponent();
+            _deviceService = deviceService;
+            _networkStatisticService = new NetworkStatisticService();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +42,7 @@ namespace FireNetCSharp
 
                 foreach (var dev in devices)
                 {
-                    cmbDevices.Items.Add(dev.Name);
+                    cmbDevices.Items.Add(dev.Description); // The name of the device
                 }
 
                 cmbDevices.SelectedIndex = 0;
@@ -60,6 +65,7 @@ namespace FireNetCSharp
             {
                 _selectedDevice = devices[cmbDevices.SelectedIndex];
             }
+            _selectedDevice.Open();
         }
 
         private void propertiesClicked(object sender, EventArgs e)
@@ -71,8 +77,31 @@ namespace FireNetCSharp
                 return;
             }
 
-            DeviceProperties deviceProperties = new DeviceProperties(_selectedDevice);
+            DeviceProperties deviceProperties = new DeviceProperties(new Device(_selectedDevice));
             deviceProperties.Show();
+        }
+
+        private void btnCaptureSelected(object sender, EventArgs e)
+        {
+            if (_selectedDevice == null)
+            {
+                MessageBox.Show("Please select a device first.", "No Device Selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (startCaptureButton.Text == "Start Capturing")
+            {
+                _networkStatisticService.StartCapturing(_selectedDevice);
+                startCaptureButton.Text = "Stop Capturing";
+                cmbDevices.Enabled = false;
+            }
+            else
+            {
+                _networkStatisticService.StopCapturing(_selectedDevice);
+                startCaptureButton.Text = "Start Capturing";
+                cmbDevices.Enabled = true; 
+            }
         }
     }
 }
