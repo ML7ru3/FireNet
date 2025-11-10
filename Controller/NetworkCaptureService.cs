@@ -13,9 +13,9 @@ namespace FireNetCSharp.Controller
     public class NetworkCaptureService(LibPcapLiveDevice device) : INetworkCaptureService
     {
         private RawCapture rawPacket;
-        public readonly List<PacketDetail> listProcessedPackets = new List<PacketDetail>();
         private LibPcapLiveDevice _device = device;
-        
+        public event EventHandler<PacketDetail> PacketCaptured;
+
         private long _downloadBytes = 0;
         private long _uploadBytes = 0;
         private DateTime _captureStartTime;
@@ -85,7 +85,8 @@ namespace FireNetCSharp.Controller
                         _downloadBytes += newPacket.Length;
                     }
 
-                    //listProcessedPackets.Add(newPacket);
+                    // Event for captured packet to datagrid
+                    PacketCaptured?.Invoke(this, newPacket);
                 }
             }
             catch (Exception ex)
