@@ -4,6 +4,7 @@ using SharpPcap.LibPcap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FireNetCSharp.Controller
 {
@@ -17,9 +18,9 @@ namespace FireNetCSharp.Controller
             _deviceList = CaptureDeviceList.Instance;
         }
 
-        public List<Device> GetAllDeviceInfo()
+        public List<LibPcapLiveDevice> GetAllDeviceInfo()
         {
-            var devices = new List<Device>();
+            var devices = new List<LibPcapLiveDevice>();
             foreach (var dev in _deviceList)
             {
                 if (dev is LibPcapLiveDevice liveDev)
@@ -27,18 +28,7 @@ namespace FireNetCSharp.Controller
                     try
                     {
                         liveDev.Open(); // Required before accessign some fields
-
-                        var firstAddr = liveDev.Addresses.FirstOrDefault(a => a.Addr?.ipAddress != null);
-                        devices.Add(new Device
-                        {
-                            Name = liveDev.Description,
-                            Description = liveDev.Name,
-                            MacAddress = liveDev.MacAddress?.ToString() ?? "N/A",
-                            IpAddress = firstAddr?.Addr?.ipAddress?.ToString() ?? "N/A",
-                            Netmask = firstAddr?.Netmask?.ipAddress?.ToString() ?? "N/A",
-                            Broadcast = firstAddr?.Broadaddr?.ipAddress?.ToString() ?? "N/A",
-                            LinkType = liveDev.LinkType.ToString() ?? "N/A",
-                        });
+                        devices.Add(liveDev);
                     }
                     catch (Exception ex)
                     {

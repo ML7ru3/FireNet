@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FireNetCSharp.Controller;
+using FireNetCSharp.Controller.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,10 @@ namespace FireNetCSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+
+            IDeviceService deviceService = new DeviceService();
+            
+            Application.Run(new Main(deviceService));
         }
     }
 }
