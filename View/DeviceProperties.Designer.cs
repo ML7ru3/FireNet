@@ -55,7 +55,6 @@
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -65,7 +64,6 @@
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Description:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -206,7 +204,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DeviceProperties";
             this.Text = "Device Properties";
-            this.Load += new System.EventHandler(this.DeviceProperties_Load);
             ((System.ComponentModel.ISupportInitialize)(this.networkIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -42,7 +42,7 @@ namespace FireNetCSharp.Controller
             double seconds = (DateTime.UtcNow - _captureStartTime).TotalSeconds;
             if (seconds <= 0) return 0;
 
-            double megabits = (_downloadBytes * 8.0) / (1024 * 1024); // bytes → megabits
+            double megabits = (_downloadBytes * 8.0) / (1024); // bytes → kilo bits
             double mbps = megabits / seconds;
             return Math.Round(mbps, 2);
         }
@@ -52,7 +52,7 @@ namespace FireNetCSharp.Controller
             double seconds = (DateTime.UtcNow - _captureStartTime).TotalSeconds;
             if (seconds <= 0) return 0;
 
-            double megabits = (_uploadBytes * 8.0) / (1024 * 1024);
+            double megabits = (_uploadBytes * 8.0) / (1024);
             double mbps = megabits / seconds;
             return Math.Round(mbps, 2);
         }
@@ -84,7 +84,8 @@ namespace FireNetCSharp.Controller
                     {
                         _downloadBytes += newPacket.Length;
                     }
-                    listProcessedPackets.Add(newPacket);
+
+                    //listProcessedPackets.Add(newPacket);
                 }
             }
             catch (Exception ex)

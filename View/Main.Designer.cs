@@ -32,6 +32,10 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.cmbDevices = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -78,12 +82,30 @@
             this.networkChart.Name = "networkChart";
             this.networkChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "downloadSpeed";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "uploadSpeed";
             this.networkChart.Series.Add(series1);
+            this.networkChart.Series.Add(series2);
             this.networkChart.Size = new System.Drawing.Size(812, 527);
             this.networkChart.TabIndex = 3;
-            this.networkChart.Text = "chart1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "internetSpeed";
+            title1.Text = "Internet Speed";
+            title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title2.Name = "speed";
+            title2.Text = "Speed (kbps)";
+            title3.Alignment = System.Drawing.ContentAlignment.BottomRight;
+            title3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title3.Name = "time";
+            title3.Text = "Time (s)";
+            this.networkChart.Titles.Add(title1);
+            this.networkChart.Titles.Add(title2);
+            this.networkChart.Titles.Add(title3);
             // 
             // propertiesButton
             // 
@@ -145,10 +167,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1142, 594);
+            this.tabPage2.Size = new System.Drawing.Size(1142, 610);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Firewall";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // _updateTimer
+            // 
+            this._updateTimer.Tick += new System.EventHandler(this.UpdateChart);
             // 
             // Main
             // 
@@ -159,6 +185,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FireNet";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.packetCaptureGrid)).EndInit();
             this.firewallTab.ResumeLayout(false);
