@@ -4,7 +4,6 @@ using PacketDotNet;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +17,13 @@ namespace FireNetCSharp.Controller
 
         private long _downloadBytes = 0;
         private long _uploadBytes = 0;
-        private DateTime _captureStartTime;
 
         public Task StartCapturing()
         {
             _downloadBytes = 0;
             _uploadBytes = 0;
-            _captureStartTime = DateTime.UtcNow;
 
-            _device.OnPacketArrival += new PacketArrivalEventHandler(OnPacketArrival);
+            _device.OnPacketArrival += new PacketArrivalEventHandler(OnPacketArrival); // Packet handler
             _device.StartCapture();
             return Task.CompletedTask;
         }
@@ -39,24 +36,24 @@ namespace FireNetCSharp.Controller
 
         public double GetDownloadStatistic()
         {
-            double seconds = (DateTime.UtcNow - _captureStartTime).TotalSeconds;
-            if (seconds <= 0) return 0;
-
-            double megabits = (_downloadBytes * 8.0) / (1024 * 1024); // bytes → mega bits
-            double mbps = megabits / seconds;
+            double mbps = (_downloadBytes * 8.0) / (1024 * 1024); // bytes → mega bits
+            _downloadBytes = 0;
             return Math.Round(mbps, 2);
         }
 
         public double GetUploadStatistic()
         {
-            double seconds = (DateTime.UtcNow - _captureStartTime).TotalSeconds;
-            if (seconds <= 0) return 0;
-
-            double megabits = (_uploadBytes * 8.0) / (1024 * 1024);
-            double mbps = megabits / seconds;
+            double mbps = (_uploadBytes * 8.0) / (1024 * 1024); // bytes → mega bits
+            _uploadBytes = 0;
             return Math.Round(mbps, 2);
         }
 
+        /// <summary>
+        /// Packet handler and mto mapper to PacketDetail
+        /// Also update download bytes and upload bytes each packets received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnPacketArrival(object sender, PacketCapture e)
         {
             try
@@ -86,7 +83,7 @@ namespace FireNetCSharp.Controller
                     }
 
                     // Event for captured packet to datagrid
-                    PacketCaptured?.Invoke(this, newPacket);
+                    //PacketCaptured?.Invoke(this, newPacket);
                 }
             }
             catch (Exception ex)

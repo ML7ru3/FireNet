@@ -122,7 +122,11 @@ namespace FireNetCSharp
             }
         }
 
-
+        /// <summary>
+        /// show all detail properties from selected device
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void propertiesClicked(object sender, EventArgs e)
         {
             if (_selectedDevice == null)
@@ -164,6 +168,11 @@ namespace FireNetCSharp
             }
         }
 
+        /// <summary>
+        /// update chart realtime
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateChart(object sender, EventArgs e)
         {
             if (_selectedDevice == null) return;
@@ -172,25 +181,28 @@ namespace FireNetCSharp
             double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic();
 
             // Limit points to last 60
-            if (networkChart.Series["downloadSpeed"].Points.Count > 60)
+            if (networkChart.Series["Download Speed"].Points.Count > 60)
             {
-                networkChart.Series["downloadSpeed"].Points.RemoveAt(0);
-                networkChart.Series["uploadSpeed"].Points.RemoveAt(0);
+                networkChart.Series["Download Speed"].Points.RemoveAt(0);
+                networkChart.Series["Upload Speed"].Points.RemoveAt(0);
             }
 
             string time = DateTime.Now.ToString("HH:mm:ss");
-            networkChart.Series["downloadSpeed"].Points.AddXY(time, downloadSpeed);
-            networkChart.Series["uploadSpeed"].Points.AddXY(time, uploadSpeed);
+            networkChart.Series["Download Speed"].Points.AddXY(time, downloadSpeed);
+            networkChart.Series["Upload Speed"].Points.AddXY(time, uploadSpeed);
 
             // Tooltip
-            networkChart.Series["downloadSpeed"].ToolTip = $"#VALY Mbps at {time}";
-            networkChart.Series["uploadSpeed"].ToolTip = $"#VALY Mbps at {time}";
+            networkChart.Series["Download Speed"].ToolTip = $"#VALY Mbps at {time}";
+            networkChart.Series["Upload Speed"].ToolTip = $"#VALY Mbps at {time}";
         }
-
+        
+        /// <summary>
+        /// reset numPackets, networkChart and packetGrid when reset or initialize.
+        /// </summary>
         private void InitializeGridChart()
         {
-            networkChart.Series["downloadSpeed"].Points.Clear();
-            networkChart.Series["uploadSpeed"].Points.Clear();
+            networkChart.Series["Download Speed"].Points.Clear();
+            networkChart.Series["Upload Speed"].Points.Clear();
             _packetList.Clear();
             numPackets = 0;
             packetCount.Text = string.Empty;
@@ -202,6 +214,11 @@ namespace FireNetCSharp
             btnRefresh.Enabled = !started; 
         }
 
+        /// <summary>
+        /// user UI/UX when hover mouse over graph
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void networkChart_MouseMove(object sender, MouseEventArgs e)
         {
             var pos = e.Location;

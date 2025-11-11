@@ -17,8 +17,13 @@ Description: Write DateTime when done a task.
 
 
 ## Firewall
-- [ ] Firewall integrated.
+- **FEATURE** [ ] Firewall integrated.
 
 # 10/11/2025
-- [ ] List all application that using network and their download/upload speed.
+- **FEATURE** [ ] List all application that using network and their download/upload speed when hover the speed graph.
 
+# 11/11/2025
+
+## Network Capture
+- **BUG** [ ] Right now, the download speed and upload speed is calculated by average packets in the capturing time. **Expect**: calculated by number of Mb in each second.
+- **BUG** [ ] When doing internet speed test, the graph does not update =>  **Optimize**
