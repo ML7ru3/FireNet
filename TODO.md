@@ -25,5 +25,6 @@ Description: Write DateTime when done a task.
 # 11/11/2025
 
 ## Network Capture
-- **BUG** [ ] Right now, the download speed and upload speed is calculated by average packets in the capturing time. **Expect**: calculated by number of Mb in each second.
-- **BUG** [ ] When doing internet speed test, the graph does not update =>  **Optimize**
+- **BUG** [x] Right now, the download speed and upload speed is calculated by average packets in the capturing time. **Expect**: calculated by number of Mb in each second. ***11/11/2025***
+- **BUG** [x] When doing internet speed test, the graph does not update =>  **Optimize** ***11/11/2025***
+- **FEATURE** [ ] There will be another screen shows all detail list of packets (including data of that packets). Ref: Wireshark.

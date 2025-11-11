@@ -83,7 +83,7 @@ namespace FireNetCSharp.Controller
                     }
 
                     // Event for captured packet to datagrid
-                    //PacketCaptured?.Invoke(this, newPacket);
+                    PacketCaptured?.Invoke(this, newPacket);
                 }
             }
             catch (Exception ex)

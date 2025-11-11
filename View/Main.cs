@@ -5,6 +5,7 @@ using FireNetCSharp.View;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -19,6 +20,8 @@ namespace FireNetCSharp
         private long numPackets = 0;
 
         private BindingList<PacketDetail> _packetList = new BindingList<PacketDetail>();
+        private readonly ConcurrentQueue<PacketDetail> _packetQueue = new ConcurrentQueue<PacketDetail>();
+
         public Main(IDeviceService deviceService)
         {
             InitializeComponent();
@@ -28,10 +31,6 @@ namespace FireNetCSharp
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadDevices();
-            _updateTimer = new Timer();
-            _updateTimer.Interval = 1000; // update every second
-            _updateTimer.Tick += UpdateChart;
-
             packetCaptureGrid.DataSource = _packetList;
             packetCaptureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -92,34 +91,11 @@ namespace FireNetCSharp
         /// <param name="packet">The details of the captured packet to be added to the list.</param>
         private void NetworkCaptureService_PacketCaptured(object sender, PacketDetail packet)
         {
-            if (InvokeRequired)
+            if (!InvokeRequired) return;
+            Invoke(new Action(() =>
             {
-                Invoke(new Action(() =>
-                {
-                    _packetList.Add(packet);
-                    numPackets++;
-
-                    // Optional: limit to last 900 packets
-                    if (_packetList.Count > 900)
-                    {
-                        _packetList.RemoveAt(0);
-                    }
-
-                    packetCount.Text = $"The number of packets: {numPackets}";
-                }));
-            }
-            else
-            {
-                _packetList.Add(packet);
-                numPackets++;
-
-                if (_packetList.Count > 900)
-                {
-                    _packetList.RemoveAt(0);
-                }
-
-                packetCount.Text = $"The number of packets: {numPackets}";
-            }
+                _packetQueue.Enqueue(packet);
+            }));
         }
 
         /// <summary>
@@ -176,6 +152,16 @@ namespace FireNetCSharp
         private void UpdateChart(object sender, EventArgs e)
         {
             if (_selectedDevice == null) return;
+
+            while (_packetQueue.TryDequeue(out var packet))
+            {
+                _packetList.Add(packet);
+                numPackets++;
+                if (_packetList.Count > 970)
+                    _packetList.RemoveAt(0);
+            }
+
+            packetCount.Text = $"The number of packets: {numPackets}";
 
             double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic();
             double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic();
