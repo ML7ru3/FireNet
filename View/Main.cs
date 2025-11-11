@@ -35,7 +35,7 @@ namespace FireNetCSharp
             packetCaptureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void BtnRefresh_Click(object sender, EventArgs e)
         {
             LoadDevices();
             InitializeGridChart();
@@ -68,7 +68,7 @@ namespace FireNetCSharp
             }
         }
 
-        private void cmbDevices_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
             var devices = _deviceService.GetAllDeviceInfo();
             if (cmbDevices.SelectedIndex >= 0)
@@ -103,7 +103,7 @@ namespace FireNetCSharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void propertiesClicked(object sender, EventArgs e)
+        private void PropertiesClicked(object sender, EventArgs e)
         {
             if (_selectedDevice == null)
             {
@@ -116,7 +116,7 @@ namespace FireNetCSharp
             deviceProperties.Show();
         }
 
-        private void btnCaptureSelected(object sender, EventArgs e)
+        private void BtnCaptureSelected(object sender, EventArgs e)
         {
             if (_selectedDevice == null)
             {
@@ -205,7 +205,7 @@ namespace FireNetCSharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void networkChart_MouseMove(object sender, MouseEventArgs e)
+        private void NetworkChart_MouseMove(object sender, MouseEventArgs e)
         {
             var pos = e.Location;
             var result = networkChart.HitTest(pos.X, pos.Y);
