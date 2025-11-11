@@ -183,8 +183,8 @@ namespace FireNetCSharp
             networkChart.Series["uploadSpeed"].Points.AddXY(time, uploadSpeed);
 
             // Tooltip
-            networkChart.Series["downloadSpeed"].ToolTip = $"#VALY at {time}";
-            networkChart.Series["uploadSpeed"].ToolTip = $"#VALY at {time}";
+            networkChart.Series["downloadSpeed"].ToolTip = $"#VALY Mbps at {time}";
+            networkChart.Series["uploadSpeed"].ToolTip = $"#VALY Mbps at {time}";
         }
 
         private void InitializeGridChart()

@@ -45,9 +45,9 @@
             this.startCaptureButton = new System.Windows.Forms.Button();
             this.firewallTab = new System.Windows.Forms.TabControl();
             this.networkTab = new System.Windows.Forms.TabPage();
+            this.packetCount = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this._updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.packetCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.packetCaptureGrid)).BeginInit();
             this.firewallTab.SuspendLayout();
@@ -81,11 +81,14 @@
             this.networkChart.Legends.Add(legend1);
             this.networkChart.Location = new System.Drawing.Point(324, 59);
             this.networkChart.Name = "networkChart";
-            this.networkChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            this.networkChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            this.networkChart.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "downloadSpeed";
+            series2.BorderWidth = 3;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
@@ -99,7 +102,7 @@
             title1.Text = "Internet Speed";
             title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
             title2.Name = "speed";
-            title2.Text = "Speed (kbps)";
+            title2.Text = "Speed (Mbps)";
             title3.Alignment = System.Drawing.ContentAlignment.BottomRight;
             title3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title3.Name = "time";
@@ -168,20 +171,6 @@
             this.networkTab.Text = "Network";
             this.networkTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1142, 610);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Firewall";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // _updateTimer
-            // 
-            this._updateTimer.Tick += new System.EventHandler(this.UpdateChart);
-            // 
             // packetCount
             // 
             this.packetCount.AutoSize = true;
@@ -189,6 +178,20 @@
             this.packetCount.Name = "packetCount";
             this.packetCount.Size = new System.Drawing.Size(0, 13);
             this.packetCount.TabIndex = 7;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1142, 618);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Firewall";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // _updateTimer
+            // 
+            this._updateTimer.Tick += new System.EventHandler(this.UpdateChart);
             // 
             // Main
             // 
