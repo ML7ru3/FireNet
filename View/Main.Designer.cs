@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.cmbDevices = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -75,41 +75,41 @@
             // 
             // networkChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.networkChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.networkChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.networkChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.networkChart.Legends.Add(legend3);
             this.networkChart.Location = new System.Drawing.Point(324, 59);
             this.networkChart.Name = "networkChart";
             this.networkChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             this.networkChart.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            series1.BorderWidth = 3;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "downloadSpeed";
-            series2.BorderWidth = 3;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "uploadSpeed";
-            this.networkChart.Series.Add(series1);
-            this.networkChart.Series.Add(series2);
+            series5.BorderWidth = 3;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Download Speed";
+            series6.BorderWidth = 3;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "Upload Speed";
+            this.networkChart.Series.Add(series5);
+            this.networkChart.Series.Add(series6);
             this.networkChart.Size = new System.Drawing.Size(812, 527);
             this.networkChart.TabIndex = 3;
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.Name = "internetSpeed";
-            title1.Text = "Internet Speed";
-            title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
-            title2.Name = "speed";
-            title2.Text = "Speed (Mbps)";
-            title3.Alignment = System.Drawing.ContentAlignment.BottomRight;
-            title3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            title3.Name = "time";
-            title3.Text = "Time (s)";
-            this.networkChart.Titles.Add(title1);
-            this.networkChart.Titles.Add(title2);
-            this.networkChart.Titles.Add(title3);
+            title7.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title7.Name = "internetSpeed";
+            title7.Text = "Internet Speed";
+            title8.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title8.Name = "speed";
+            title8.Text = "Speed (Mbps)";
+            title9.Alignment = System.Drawing.ContentAlignment.BottomRight;
+            title9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title9.Name = "time";
+            title9.Text = "Time (s)";
+            this.networkChart.Titles.Add(title7);
+            this.networkChart.Titles.Add(title8);
+            this.networkChart.Titles.Add(title9);
             this.networkChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.networkChart_MouseMove);
             // 
             // propertiesButton
@@ -191,6 +191,7 @@
             // 
             // _updateTimer
             // 
+            this._updateTimer.Interval = 1000;
             this._updateTimer.Tick += new System.EventHandler(this.UpdateChart);
             // 
             // Main
