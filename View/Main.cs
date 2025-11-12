@@ -81,14 +81,12 @@ namespace FireNetCSharp
         }
 
         /// <summary>
-        /// Handles the event when a network packet is captured, adding it to the internal packet list.
+        /// Handles the event when a network packet is captured.
         /// </summary>
-        /// <remarks>This method ensures thread-safe addition of packets to the list. If the method is
-        /// called from a  different thread than the one that created the control, it uses <see cref="Control.Invoke"/>
-        /// to  marshal the call to the correct thread. The list is limited to the last 1000 packets, removing  the
-        /// oldest packet when this limit is exceeded.</remarks>
+        /// <remarks>This method enqueues the captured packet for further processing. It ensures that the
+        /// operation is performed on the correct thread if required.</remarks>
         /// <param name="sender">The source of the event, typically the network capture service.</param>
-        /// <param name="packet">The details of the captured packet to be added to the list.</param>
+        /// <param name="packet">The details of the captured packet to be processed.</param>
         private void NetworkCaptureService_PacketCaptured(object sender, PacketDetail packet)
         {
             if (!InvokeRequired) return;
@@ -217,6 +215,17 @@ namespace FireNetCSharp
             {
                 networkChart.Cursor = Cursors.Default;
             }
+        }
+
+        /// <summary>
+        /// show all application using network
+        /// eg: browser, ....
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowDetailNetwork(object sender, EventArgs e)
+        {
+            
         }
     }
 }

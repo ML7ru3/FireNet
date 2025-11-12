@@ -3,7 +3,6 @@ Description: Write DateTime when done a task.
 # 7/11/2025
 
 ## Network Capture
-
 - **FEATURE** [x] Make a WinForms that show all the description of the network device selected. ***(07/11/2025)***
     - [x] Know what all the device attributes you can show to the client (ip addr, mac addr, name, ...). 
     - [x] Display to a Winform 
@@ -19,7 +18,13 @@ Description: Write DateTime when done a task.
 - **FEATURE** [ ] Firewall integrated.
 
 # 10/11/2025
-- **FEATURE** [ ] List all application that using network and their download/upload speed when hover the speed graph.
+- **FEATURE** [ ] List all application that using network and their download/upload speed when hover the speed graph. **(VERY HARD)**
+    - The idea is: **map packets -> connections -> process IDs (PIDs)**
+    - Steps:
+        - Capture Packets
+        - Get Actice connections + Process IDS
+        - Match Packets to Process
+    - Ref: https://chatgpt.com/s/t_69140f09441c8191975bf6b142dc4fd1
 
 # 11/11/2025
 ## Network Capture
