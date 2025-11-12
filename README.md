@@ -2,7 +2,7 @@
 Project III - An User-friendly Network Monitoring App
 
 ## Dependencies
-- .NET Framework 4.6.1
+- .NET Framework 8.0
 - WinPcap or Npcap
 
 ## Demonstration
