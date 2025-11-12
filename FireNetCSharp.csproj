@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Controller\DeviceService.cs" />
     <Compile Include="Controller\Interface\IDeviceService.cs" />
+    <Compile Include="Controller\Interface\INetworkAnalysis.cs" />
     <Compile Include="Controller\Interface\INetworkCaptureService.cs" />
     <Compile Include="Controller\NetworkCaptureService.cs" />
     <Compile Include="Model\PacketDetail.cs" />

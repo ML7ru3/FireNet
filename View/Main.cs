@@ -163,8 +163,8 @@ namespace FireNetCSharp
 
             packetCount.Text = $"The number of packets: {numPackets}";
 
-            double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic();
-            double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic();
+            double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic().Result;
+            double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic().Result;
 
             // Limit points to last 60
             if (networkChart.Series["Download Speed"].Points.Count > 60)
