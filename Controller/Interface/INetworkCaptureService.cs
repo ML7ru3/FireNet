@@ -9,8 +9,8 @@ namespace FireNetCSharp.Controller.Interface
     {
         Task StartCapturing();
         Task StopCapturing();
-        Task<double> GetDownloadStatistic();
-        Task<double> GetUploadStatistic();
+        double GetDownloadStatistic();
+        double GetUploadStatistic();
 
         event EventHandler<PacketDetail> PacketCaptured;
     }

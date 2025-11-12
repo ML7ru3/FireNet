@@ -31,6 +31,7 @@ Description: Write DateTime when done a task.
 - **BUG** [x] Right now, the download speed and upload speed is calculated by average packets in the capturing time. **Expect**: calculated by number of Mb in each second. ***11/11/2025***
 - **BUG** [x] When doing internet speed test, the graph does not update =>  **Optimize** ***11/11/2025***
 - **FEATURE** [ ] There will be another screen shows all detail list of packets (including data of that packets). Ref: Wireshark.
+    - Filter and Search
 
 # 12/11/2025
 - **FEATURE** [ ] Save to pcap file after done capturing.

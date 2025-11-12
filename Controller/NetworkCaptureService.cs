@@ -34,14 +34,14 @@ namespace FireNetCSharp.Controller
             return Task.CompletedTask;  
         }
 
-        public async Task<double> GetDownloadStatistic()
+        public double GetDownloadStatistic()
         {
             double mbps = (_downloadBytes * 8.0) / (1024 * 1024); // bytes → mega bits
             _downloadBytes = 0;
             return Math.Round(mbps, 2);
         }
 
-        public async Task<double> GetUploadStatistic()
+        public double GetUploadStatistic()
         {
             double mbps = (_uploadBytes * 8.0) / (1024 * 1024); // bytes → mega bits
             _uploadBytes = 0;

@@ -7,6 +7,7 @@ using SharpPcap.LibPcap;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -161,8 +162,8 @@ namespace FireNetCSharp
 
             packetCount.Text = $"The number of packets: {numPackets}";
 
-            double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic().Result;
-            double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic().Result;
+            double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic();
+            double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic();
 
             // Limit points to last 60
             if (networkChart.Series["Download Speed"].Points.Count > 60)
