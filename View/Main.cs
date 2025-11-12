@@ -7,7 +7,6 @@ using SharpPcap.LibPcap;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
