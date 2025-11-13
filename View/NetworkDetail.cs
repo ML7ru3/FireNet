@@ -13,5 +13,13 @@ namespace FireNetCSharp.View
         {
             e.Cancel = true;
         }
+
+        /// <summary>
+        /// Update application using networks
+        /// </summary>
+        public void UpdateApplicationList()
+        {
+
+        }
     }
 }

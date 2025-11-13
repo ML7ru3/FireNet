@@ -14,6 +14,7 @@ namespace FireNetCSharp.Controller
         private RawCapture rawPacket;
         private LibPcapLiveDevice _device = device;
         public event EventHandler<PacketDetail> PacketCaptured;
+        public event EventHandler<PacketDetail> TcpPacketCaptured;
 
         private long _downloadBytes = 0;
         private long _uploadBytes = 0;
@@ -72,6 +73,14 @@ namespace FireNetCSharp.Controller
                     newPacket.Destination = ipPacket.DestinationAddress.ToString();
                     newPacket.Length = ipPacket.TotalLength;
                     newPacket.Protocol = ipPacket.Protocol.ToString();
+
+                    // TODO: Implement UDP protocol
+                    var tcpPacket = ipPacket.Extract<TcpPacket>();
+                    if (tcpPacket != null)
+                    {
+                        newPacket.SourcePort = tcpPacket.SourcePort;
+                        newPacket.DestinationPort = tcpPacket.DestinationPort;
+                    }
 
                     if (newPacket.Source == _device.Addresses.FirstOrDefault().Addr.ipAddress.ToString())
                     {

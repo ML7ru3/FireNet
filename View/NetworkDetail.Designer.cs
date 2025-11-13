@@ -35,6 +35,7 @@
             // 
             this.applicationList.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.applicationList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.applicationList.GridLines = true;
             this.applicationList.HideSelection = false;
             this.applicationList.Location = new System.Drawing.Point(0, 0);
             this.applicationList.Name = "applicationList";
@@ -49,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(242, 429);
             this.Controls.Add(this.applicationList);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "NetworkDetail";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

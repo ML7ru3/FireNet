@@ -10,6 +10,8 @@ namespace FireNetCSharp.Model
         public DateTime Time { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
+        public ushort? SourcePort { get; set; }
+        public ushort? DestinationPort { get; set; }
         public string Protocol { get; set; }
         public long Length { get; set; }
         public PacketDetail() { 

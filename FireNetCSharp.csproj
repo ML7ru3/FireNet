@@ -81,6 +81,7 @@
     <Compile Include="Controller\NetworkCaptureService.cs" />
     <Compile Include="Model\PacketDetail.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\ProcessID.cs" />
     <Compile Include="View\DeviceProperties.cs">
       <SubType>Form</SubType>
     </Compile>

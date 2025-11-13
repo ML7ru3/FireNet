@@ -19,8 +19,8 @@ namespace FireNetCSharp
         private LibPcapLiveDevice _selectedDevice;
         private long numPackets = 0;
 
-        private BindingList<PacketDetail> _packetList = new BindingList<PacketDetail>();
-        private readonly ConcurrentQueue<PacketDetail> _packetQueue = new ConcurrentQueue<PacketDetail>();
+        private BindingList<PacketDetail> _packetList = new BindingList<PacketDetail>(); // Original source for data grid
+        private readonly ConcurrentQueue<PacketDetail> _packetQueue = new ConcurrentQueue<PacketDetail>(); // Update source realtime
         private NetworkDetail _networkDetail = new NetworkDetail();
 
         public Main(IDeviceService deviceService)
@@ -144,14 +144,26 @@ namespace FireNetCSharp
         }
 
         /// <summary>
-        /// update chart realtime
+        /// update every single UI every 1000ms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateChart(object sender, EventArgs e)
+        private void UpdateRealTime(object sender, EventArgs e)
         {
             if (_selectedDevice == null) return;
 
+            _networkDetail.UpdateApplicationList();
+            UpdateGrid();
+            UpdateChart();
+        }
+
+        #region UPDATE-REALTIME
+
+        /// <summary>
+        /// Update grid
+        /// </summary>
+        private void UpdateGrid()
+        {
             while (_packetQueue.TryDequeue(out var packet))
             {
                 _packetList.Add(packet);
@@ -161,9 +173,14 @@ namespace FireNetCSharp
             }
 
             packetCount.Text = $"The number of packets: {numPackets}";
+        }
 
+        // Update chart
+        private void UpdateChart()
+        {
             double downloadSpeed = _networkCaptureSerivice.GetDownloadStatistic();
             double uploadSpeed = _networkCaptureSerivice.GetUploadStatistic();
+
 
             // Limit points to last 60
             if (networkChart.Series["Download Speed"].Points.Count > 60)
@@ -180,7 +197,8 @@ namespace FireNetCSharp
             networkChart.Series["Download Speed"].ToolTip = $"#VALY Mbps at {time}";
             networkChart.Series["Upload Speed"].ToolTip = $"#VALY Mbps at {time}";
         }
-        
+        #endregion
+
         /// <summary>
         /// reset numPackets, networkChart and packetGrid when reset or initialize.
         /// </summary>
