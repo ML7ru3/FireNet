@@ -95,8 +95,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\NetworkDetail.xaml.cs">
-      <DependentUpon>NetworkDetail.xaml</DependentUpon>
+    <Compile Include="View\NetworkDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\NetworkDetail.Designer.cs">
+      <DependentUpon>NetworkDetail.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\DeviceProperties.resx">
       <DependentUpon>DeviceProperties.cs</DependentUpon>
@@ -115,6 +118,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\NetworkDetail.resx">
+      <DependentUpon>NetworkDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -131,12 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\networklogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="View\NetworkDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

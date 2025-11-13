@@ -21,6 +21,7 @@ namespace FireNetCSharp
 
         private BindingList<PacketDetail> _packetList = new BindingList<PacketDetail>();
         private readonly ConcurrentQueue<PacketDetail> _packetQueue = new ConcurrentQueue<PacketDetail>();
+        private NetworkDetail _networkDetail = new NetworkDetail();
 
         public Main(IDeviceService deviceService)
         {
@@ -203,29 +204,16 @@ namespace FireNetCSharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NetworkChart_MouseMove(object sender, MouseEventArgs e)
+        private void ShowDetailNetwork(object sender, MouseEventArgs e)
         {
-            var pos = e.Location;
-            var result = networkChart.HitTest(pos.X, pos.Y);
-            if (result.ChartElementType == ChartElementType.DataPoint)
+            if (!_networkDetail.Visible)
             {
-                networkChart.Cursor = Cursors.Hand;
+                _networkDetail.Show();
             }
             else
             {
-                networkChart.Cursor = Cursors.Default;
+                _networkDetail.Visible = false;
             }
-        }
-
-        /// <summary>
-        /// show all application using network
-        /// eg: browser, ....
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowDetailNetwork(object sender, EventArgs e)
-        {
-            
         }
     }
 }
