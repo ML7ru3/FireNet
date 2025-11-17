@@ -39,6 +39,10 @@ Description: Write DateTime when done a task.
 # 17/11/2025
 Change of purpose: "personal network monitor" in this context is your network deployed.
 
+-> Solution:
+- Deploy an web server that contains all the firewall rules.
+- When the app starts, it will connect to that web server to get all the firewall rules.
+- Apply those rules to the local machine.
 
 # FINAL RELEASE
 - [ ] Make an installer for windows.
