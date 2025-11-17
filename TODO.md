@@ -18,7 +18,7 @@ Description: Write DateTime when done a task.
 - **FEATURE** [ ] Firewall integrated.
 
 # 10/11/2025
-- **FEATURE** [ ] List all application that using network and their download/upload speed when hover the speed graph. **(VERY HARD)**
+- **FEATURE (CONFIRMING -> DELAYED)** [ ] List all application that using network and their download/upload speed when hover the speed graph. **(VERY HARD)**
     - The idea is: **map packets -> connections -> process IDs (PIDs)**
     - Steps:
         - Capture Packets
@@ -35,6 +35,10 @@ Description: Write DateTime when done a task.
 
 # 12/11/2025
 - **FEATURE** [ ] Save to pcap file after done capturing.
+
+# 17/11/2025
+Change of purpose: "personal network monitor" in this context is your network deployed.
+
 
 # FINAL RELEASE
 - [ ] Make an installer for windows.
